@@ -1,0 +1,37 @@
+.form-fields {
+  .title,
+  .first-name,
+  .last-name {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    label {
+      width: 70px;
+    }
+  }
+
+  label {
+    font-size: 12px;
+  }
+  .first-name,
+  .last-name {
+    input {
+      flex-grow: 1;
+    }
+  }
+  .submit-form {
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  .last-name {
+    input.ng-touched.ng-invalid {
+      border-color: red;
+    }
+  }
+  .error-message {
+    font-size: 12px;
+    padding-left: 70px;
+    color: red;
+  }
+}
