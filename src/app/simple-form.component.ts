@@ -47,7 +47,10 @@ export class SimpleFormComponent implements OnInit, OnDestroy {
 
   public initSubscriptions() {
     const title$ = this.titleService.getTitles().pipe(
-      map((titles) => titles.filter((t) => t.name !== '!')),
+      map((titles) =>  {
+        return titles.filter((t) => t.name !== '!')
+                     .sort((a,b)=> a.name.localeCompare(b.name))
+      }),
       share()
     );
 

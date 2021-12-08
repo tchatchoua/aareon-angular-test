@@ -42,8 +42,8 @@ describe('SimpleFormComponent', () => {
     );
 
     const expectedValues = [
-      { name: 'Mr', isDefault: false },
       { name: 'Dr', isDefault: true },
+      { name: 'Mr', isDefault: false }
     ];
 
     // act
@@ -76,6 +76,34 @@ describe('SimpleFormComponent', () => {
 
     expect(title).toBe(expectedTitle);
     done();
+  });
+
+  it('should sort the title in alphabetic order', (done) => {
+    // arrange
+    spyOn(mockTitleService, 'getTitles').and.returnValue(
+      of([
+        { name: 'bb', isDefault: false },
+        { name: 'aa', isDefault: false },
+        { name: 'Dr', isDefault: true },
+        { name: 'Mrs', isDefault: false },
+      ])
+    );
+
+    const expectedValues = [
+      { name: 'aa', isDefault: false },
+      { name: 'bb', isDefault: false },
+      { name: 'Dr', isDefault: true },
+      { name: 'Mrs', isDefault: false }
+    ];
+
+    // act
+    component.ngOnInit();
+
+    //assert
+    component.title$.subscribe((titles) => {
+      expect(titles).toEqual(expectedValues);
+      done();
+    });
   });
 
   it('should mark the form as touched if it is invalid', () => {
